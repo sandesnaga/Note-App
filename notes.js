@@ -7,6 +7,8 @@ const getNotes = () => {
 
 };
 
+//add note 
+
 const addNote = function(title, body){
     const notes = loadNotes();   
     const duplicateNote = notes.find((note)=>note.title === title
@@ -27,6 +29,8 @@ const addNote = function(title, body){
         console.log(chalk.red.inverse("Note title taken"));        
     }   
 }
+
+// function to remove note
 const removeNote = (title)=>{
     const notes = loadNotes();
     const notestokeep = notes.filter((note)=>  note.title !== title
@@ -41,6 +45,8 @@ const removeNote = (title)=>{
     saveNotes(notestokeep);
 
 }
+
+// function to list notes
 const listNotes = () =>{
     const notes = loadNotes();
     console.log(chalk.blue.inverse("Your notes"));
@@ -49,16 +55,17 @@ const listNotes = () =>{
         console.log(chalk.yellow("body: "+ element.body));
     });
 };
-
+// function to read particular  note
 const readNote =(title) =>{
     const notes = loadNotes();
-    const notesToRead = notes.filter((note)=>note.title === title);
-    notesToRead.forEach(element => {
-        console.log(chalk.green.inverse("Title: " + element.title));
-        console.log(chalk.yellow.inverse("Title: " + element.body));
-    });
-    
-    
+    const noteToRead = notes.find((note)=>note.title === title);
+    if(noteToRead){
+        console.log(chalk.green.inverse("Title: " + noteToRead.title));
+        console.log(chalk.yellow.inverse("Title: " + noteToRead.body));
+    }else{
+        console.log(chalk.red.inverse("No note was found!"));
+        
+    }  
 
 }
 
